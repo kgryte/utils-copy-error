@@ -87,7 +87,7 @@ test-tape: node_modules
 	NODE_ENV=$(NODE_ENV) \
 	NODE_PATH=$(NODE_PATH_TEST) \
 	$(TAPE) \
-		$(TESTS) \
+		"$(TESTS)" \
 	| $(TAP_REPORTER)
 
 
@@ -105,7 +105,7 @@ test-istanbul-tape: node_modules
 		--dir $(ISTANBUL_OUT) \
 		--report $(ISTANBUL_REPORT) \
 	$(TAPE) \
-		$(TESTS)
+		"$(TESTS)"
 
 
 
