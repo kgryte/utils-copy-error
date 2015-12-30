@@ -202,8 +202,8 @@ test( 'additional (enumerable) properties', function test( t ) {
 	err1.boop = 'beep';
 
 	err2 = copy( err1 );
-	t.equal( err2.beep, err1.beep );
-	t.equal( err2.boop, err1.boop );
+	t.equal( err2.beep, err1.beep, 'data descriptor' );
+	t.equal( err2.boop, err1.boop, 'data descriptor' );
 
 	// Accessor descriptor...
 	err1 = new Error( 'errrr' );
@@ -223,8 +223,16 @@ test( 'additional (enumerable) properties', function test( t ) {
 	});
 
 	err2 = copy( err1 );
-	t.equal( err2.beep, err1.beep );
-	t.equal( err2.boop, err1.boop );
+	t.equal( err2.beep, err1.beep, 'accessor descriptor' );
+	t.equal( err2.boop, err1.boop, 'accessor descriptor' );
+
+	// Deep equal...
+	err1 = new Error( 'errrr' );
+	err1.arr = [ 1, 2, [ 3, 4, 5 ] ];
+
+	err2 = copy( err1 );
+	t.notEqual( err2.arr, err1.arr, 'new instances' );
+	t.deepEqual( err2.arr, err1.arr, 'deep equal' );
 
 	t.end();
 });
