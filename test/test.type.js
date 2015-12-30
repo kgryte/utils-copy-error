@@ -67,6 +67,7 @@ test( 'if an error instance has a constructor name, the function returns the nam
 test( 'if an error instance lacks a constructor or the constructor.name property is not supported, the function should check against known error constructors', function test(t ) {
 	var expected;
 	var values;
+	var ctor;
 	var err;
 	var i;
 
@@ -90,12 +91,13 @@ test( 'if an error instance lacks a constructor or the constructor.name property
 
 	for ( i = 0; i < values.length; i++ ) {
 		err = values[ i ];
-		if ( err.constructor.name ) {
-			delete err.constructor.name;
-			t.equal( typeName( err ), expected[ i ], 'returns the constructor name (missing name): ' + expected[ i ] );
-		}
-		delete err.constructor;
+
+		ctor = err.constructor;
+		err.constructor = null;
+
 		t.equal( typeName( err ), expected[ i ], 'returns the constructor name (missing constructor): ' + expected[ i ] );
+
+		err.constructor = ctor;
 	}
 	t.end();
 });
