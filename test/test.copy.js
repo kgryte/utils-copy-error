@@ -54,9 +54,9 @@ test( 'generic <Error> object', function test( t ) {
 
 	t.ok( err1 !== err2, 'separate instances' );
 	t.ok( err2 instanceof Error, 'instance of Error' );
-	t.equal( err1.message, err2.message, 'equal messages' );
-	t.equal( err1.name, err2.name, 'equal names' );
-	t.equal( err1.stack, err2.stack, 'equal stack trace' );
+	t.equal( err2.message, err1.message, 'equal messages' );
+	t.equal( err2.name, err1.name, 'equal names' );
+	t.equal( err2.stack, err1.stack, 'equal stack trace' );
 	t.end();
 });
 
@@ -66,9 +66,9 @@ test( '<TypeError>', function test( t ) {
 
 	t.ok( err1 !== err2, 'separate instances' );
 	t.ok( err2 instanceof TypeError, 'instance of TypeError' );
-	t.equal( err1.message, err2.message, 'equal messages' );
-	t.equal( err1.name, err2.name, 'equal names' );
-	t.equal( err1.stack, err2.stack, 'equal stack trace' );
+	t.equal( err2.message, err1.message, 'equal messages' );
+	t.equal( err2.name, err1.name, 'equal names' );
+	t.equal( err2.stack, err1.stack, 'equal stack trace' );
 	t.end();
 });
 
@@ -78,9 +78,9 @@ test( '<RangeError>', function test( t ) {
 
 	t.ok( err1 !== err2, 'separate instances' );
 	t.ok( err2 instanceof RangeError, 'instance of RangeError' );
-	t.equal( err1.message, err2.message, 'equal messages' );
-	t.equal( err1.name, err2.name, 'equal names' );
-	t.equal( err1.stack, err2.stack, 'equal stack trace' );
+	t.equal( err2.message, err1.message, 'equal messages' );
+	t.equal( err2.name, err1.name, 'equal names' );
+	t.equal( err2.stack, err1.stack, 'equal stack trace' );
 	t.end();
 });
 
@@ -90,9 +90,9 @@ test( '<SyntaxError>', function test( t ) {
 
 	t.ok( err1 !== err2, 'separate instances' );
 	t.ok( err2 instanceof SyntaxError, 'instance of SyntaxError' );
-	t.equal( err1.message, err2.message, 'equal messages' );
-	t.equal( err1.name, err2.name, 'equal names' );
-	t.equal( err1.stack, err2.stack, 'equal stack trace' );
+	t.equal( err2.message, err1.message, 'equal messages' );
+	t.equal( err2.name, err1.name, 'equal names' );
+	t.equal( err2.stack, err1.stack, 'equal stack trace' );
 	t.end();
 });
 
@@ -102,9 +102,9 @@ test( '<ReferenceError>', function test( t ) {
 
 	t.ok( err1 !== err2, 'separate instances' );
 	t.ok( err2 instanceof ReferenceError, 'instance of ReferenceError' );
-	t.equal( err1.message, err2.message, 'equal messages' );
-	t.equal( err1.name, err2.name, 'equal names' );
-	t.equal( err1.stack, err2.stack, 'equal stack trace' );
+	t.equal( err2.message, err1.message, 'equal messages' );
+	t.equal( err2.name, err1.name, 'equal names' );
+	t.equal( err2.stack, err1.stack, 'equal stack trace' );
 	t.end();
 });
 
@@ -114,9 +114,9 @@ test( '<EvalError>', function test( t ) {
 
 	t.ok( err1 !== err2, 'separate instances' );
 	t.ok( err2 instanceof EvalError, 'instance of EvalError' );
-	t.equal( err1.message, err2.message, 'equal messages' );
-	t.equal( err1.name, err2.name, 'equal names' );
-	t.equal( err1.stack, err2.stack, 'equal stack trace' );
+	t.equal( err2.message, err1.message, 'equal messages' );
+	t.equal( err2.name, err1.name, 'equal names' );
+	t.equal( err2.stack, err1.stack, 'equal stack trace' );
 	t.end();
 });
 
@@ -126,44 +126,31 @@ test( '<URIError>', function test( t ) {
 
 	t.ok( err1 !== err2, 'separate instances' );
 	t.ok( err2 instanceof URIError, 'instance of URIError' );
-	t.equal( err1.message, err2.message, 'equal messages' );
-	t.equal( err1.name, err2.name, 'equal names' );
-	t.equal( err1.stack, err2.stack, 'equal stack trace' );
+	t.equal( err2.message, err1.message, 'equal messages' );
+	t.equal( err2.name, err1.name, 'equal names' );
+	t.equal( err2.stack, err1.stack, 'equal stack trace' );
 	t.end();
 });
 
-test( 'environments missing a `name` property', function test( t ) {
+test( 'environments missing a `stack` trace', function test( t ) {
 	var err1;
 	var err2;
 
-	err1 = new Error( 'beep' );
-	err1.name = '';
-
-	err2 = copy( err1 );
-
-	t.ok( err1 !== err2, 'separate instances' );
-	t.ok( err2 instanceof Error, 'instance of Error' );
-	t.equal( err1.message, err2.message, 'equal messages' );
-	t.equal( err1.name, '', 'no name' );
-	t.equal( err1.stack, err2.stack, 'equal stack trace' );
-	t.end();
-});
-
-test( 'environments missing a `stack` property', function test( t ) {
-	var err1;
-	var err2;
-
+	// Blank `stack` property...
 	err1 = new Error( 'beep' );
 	err1.stack = '';
+	err1.constructor = createError;
 
 	err2 = copy( err1 );
-
-	t.ok( err1 !== err2, 'separate instances' );
-	t.ok( err2 instanceof Error, 'instance of Error' );
-	t.equal( err1.message, err2.message, 'equal messages' );
-	t.equal( err1.name, err2.name, 'equal names' );
 	t.equal( err2.stack, '', 'no stack trace' );
+
 	t.end();
+
+	function createError( msg ) {
+		var err = new Error( msg );
+		err.stack = '';
+		return err;
+	}
 });
 
 test( '`code` property (Node.js)', function test( t ) {
@@ -174,13 +161,8 @@ test( '`code` property (Node.js)', function test( t ) {
 	err1.code = 43;
 
 	err2 = copy( err1 );
+	t.equal( err2.code, err1.code, 'equal codes' );
 
-	t.ok( err1 !== err2, 'separate instances' );
-	t.ok( err2 instanceof Error, 'instance of Error' );
-	t.equal( err1.message, err2.message, 'equal messages' );
-	t.equal( err1.name, err2.name, 'equal names' );
-	t.equal( err1.stack, err2.stack, 'equal stack traces' );
-	t.equal( err1.code, err2.code, 'equal codes' );
 	t.end();
 });
 
@@ -192,13 +174,8 @@ test( '`errno` property (Node.js)', function test( t ) {
 	err1.errno = 'EACCES';
 
 	err2 = copy( err1 );
+	t.equal( err1.errno, err2.errno, 'equal errno' );
 
-	t.ok( err1 !== err2, 'separate instances' );
-	t.ok( err2 instanceof Error, 'instance of Error' );
-	t.equal( err1.message, err2.message, 'equal messages' );
-	t.equal( err1.name, err2.name, 'equal names' );
-	t.equal( err1.stack, err2.stack, 'equal stack traces' );
-	t.equal( err1.code, err2.code, 'equal errno' );
 	t.end();
 });
 
@@ -210,13 +187,8 @@ test( '`syscall` property (Node.js)', function test( t ) {
 	err1.syscall = 'boop';
 
 	err2 = copy( err1 );
+	t.equal( err2.syscall, err1.syscall, 'equal syscall values' );
 
-	t.ok( err1 !== err2, 'separate instances' );
-	t.ok( err2 instanceof Error, 'instance of Error' );
-	t.equal( err1.message, err2.message, 'equal messages' );
-	t.equal( err1.name, err2.name, 'equal names' );
-	t.equal( err1.stack, err2.stack, 'equal stack traces' );
-	t.equal( err1.syscall, err2.syscall, 'equal syscall values' );
 	t.end();
 });
 
@@ -227,9 +199,9 @@ test( 'custom errors (proto)', function test( t ) {
 	t.ok( err1 !== err2, 'separate instances' );
 	t.ok( err2 instanceof CustomError1, 'instance of CustomError' );
 	t.ok( err2 instanceof Error, 'instance of Error' );
-	t.equal( err1.message, err2.message, 'equal messages' );
-	t.equal( err1.name, err2.name, 'equal names' );
-	t.equal( err1.stack, err2.stack, 'equal stack trace' );
+	t.equal( err2.message, err1.message, 'equal messages' );
+	t.equal( err2.name, err1.name, 'equal names' );
+	t.equal( err2.stack, err1.stack, 'equal stack trace' );
 	t.end();
 });
 
@@ -242,9 +214,9 @@ if ( hasClass ) {
 		t.ok( err1 !== err2, 'separate instances' );
 		t.ok( err2 instanceof CustomError2, 'instance of CustomError' );
 		t.ok( err2 instanceof Error, 'instance of Error' );
-		t.equal( err1.message, err2.message, 'equal messages' );
-		t.equal( err1.name, err2.name, 'equal names' );
-		t.equal( err1.stack, err2.stack, 'equal stack trace' );
+		t.equal( err2.message, err1.message, 'equal messages' );
+		t.equal( err2.name, err1.name, 'equal names' );
+		t.equal( err2.stack, err1.stack, 'equal stack trace' );
 		t.end();
 	});
 }
