@@ -132,6 +132,23 @@ test( '<URIError>', function test( t ) {
 	t.end();
 });
 
+test( 'environments missing a `name` property', function test( t ) {
+	var err1;
+	var err2;
+
+	err1 = new Error( 'beep' );
+	err1.name = '';
+
+	err2 = copy( err1 );
+
+	t.ok( err1 !== err2, 'separate instances' );
+	t.ok( err2 instanceof Error, 'instance of Error' );
+	t.equal( err1.message, err2.message, 'equal messages' );
+	t.equal( err1.name, '', 'no name' );
+	t.equal( err1.stack, err2.stack, 'equal stack trace' );
+	t.end();
+});
+
 test( 'environments missing a `stack` property', function test( t ) {
 	var err1;
 	var err2;
