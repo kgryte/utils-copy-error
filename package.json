@@ -54,7 +54,8 @@
     "url": "https://github.com/kgryte/utils-copy-error/issues"
   },
   "dependencies": {
-    "object-keys": "^1.0.9"
+    "object-keys": "^1.0.9",
+    "utils-copy": "^1.0.0"
   },
   "devDependencies": {
     "browserify": "12.x.x",

@@ -41,8 +41,9 @@ var err = copy( error );
 	-	[`EvalError`][js-eval-error]
 	-	[`TypeError`][js-type-error]
 	-	[`System Error`][node-system-error] (Node.js)
-*	The `function` also supports custom [`error`][js-error] types which are [`Error`][js-error] instances (e.g., ES2015 [`Error`][js-error] subclasses).
-*	The `function` copies over all `enumerable` properties, including property descriptors.
+
+*	The `function` also supports custom [`error`][js-error] types which are [`Error`][js-error] instances (e.g., ES2015 subclasses).
+*	The `function` [deep copies][utils-copy] over all `enumerable` properties, including property descriptors. 
 
 
 ## Examples
@@ -178,3 +179,5 @@ Copyright &copy; 2015. Athan Reines.
 [js-uri-error]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError
 [js-eval-error]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError
 [node-system-error]: https://nodejs.org/api/errors.html#errors_class_system_error
+
+[utils-copy]: https://github.com/kgryte/utils-copy
