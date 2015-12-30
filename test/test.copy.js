@@ -132,6 +132,77 @@ test( '<URIError>', function test( t ) {
 	t.end();
 });
 
+test( 'environments missing a `stack` property', function test( t ) {
+	var err1;
+	var err2;
+
+	err1 = new Error( 'beep' );
+	delete err1.stack;
+
+	err2 = copy( err1 );
+
+	t.ok( err1 !== err2, 'separate instances' );
+	t.ok( err2 instanceof Error, 'instance of Error' );
+	t.equal( err1.message, err2.message, 'equal messages' );
+	t.equal( err1.name, err2.name, 'equal names' );
+	t.equal( err2.stack, void 0, 'no stack trace' );
+	t.end();
+});
+
+test( '`code` property (Node.js)', function test( t ) {
+	var err1;
+	var err2;
+
+	err1 = new Error( 'beep' );
+	err1.code = 43;
+
+	err2 = copy( err1 );
+
+	t.ok( err1 !== err2, 'separate instances' );
+	t.ok( err2 instanceof Error, 'instance of Error' );
+	t.equal( err1.message, err2.message, 'equal messages' );
+	t.equal( err1.name, err2.name, 'equal names' );
+	t.equal( err1.stack, err2.stack, 'equal stack traces' );
+	t.equal( err1.code, err2.code, 'equal codes' );
+	t.end();
+});
+
+test( '`errno` property (Node.js)', function test( t ) {
+	var err1;
+	var err2;
+
+	err1 = new Error( 'beep' );
+	err1.errno = 'EACCES';
+
+	err2 = copy( err1 );
+
+	t.ok( err1 !== err2, 'separate instances' );
+	t.ok( err2 instanceof Error, 'instance of Error' );
+	t.equal( err1.message, err2.message, 'equal messages' );
+	t.equal( err1.name, err2.name, 'equal names' );
+	t.equal( err1.stack, err2.stack, 'equal stack traces' );
+	t.equal( err1.code, err2.code, 'equal errno' );
+	t.end();
+});
+
+test( '`syscall` property (Node.js)', function test( t ) {
+	var err1;
+	var err2;
+
+	err1 = new Error( 'beep' );
+	err1.syscall = 'boop';
+
+	err2 = copy( err1 );
+
+	t.ok( err1 !== err2, 'separate instances' );
+	t.ok( err2 instanceof Error, 'instance of Error' );
+	t.equal( err1.message, err2.message, 'equal messages' );
+	t.equal( err1.name, err2.name, 'equal names' );
+	t.equal( err1.stack, err2.stack, 'equal stack traces' );
+	t.equal( err1.syscall, err2.syscall, 'equal syscall values' );
+	t.end();
+});
+
 test( 'custom errors (proto)', function test( t ) {
 	var err1 = new CustomError1( 'custom error' );
 	var err2 = copy( err1 );
