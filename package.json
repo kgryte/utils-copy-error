@@ -55,7 +55,7 @@
   },
   "dependencies": {
     "object-keys": "^1.0.9",
-    "utils-copy": "^1.0.0"
+    "utils-copy": "^1.1.0"
   },
   "devDependencies": {
     "browserify": "12.x.x",
