@@ -137,7 +137,7 @@ test( 'environments missing a `stack` property', function test( t ) {
 	var err2;
 
 	err1 = new Error( 'beep' );
-	delete err1.stack;
+	err1.stack = '';
 
 	err2 = copy( err1 );
 
@@ -145,7 +145,7 @@ test( 'environments missing a `stack` property', function test( t ) {
 	t.ok( err2 instanceof Error, 'instance of Error' );
 	t.equal( err1.message, err2.message, 'equal messages' );
 	t.equal( err1.name, err2.name, 'equal names' );
-	t.equal( err2.stack, void 0, 'no stack trace' );
+	t.equal( err2.stack, '', 'no stack trace' );
 	t.end();
 });
 
