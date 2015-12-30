@@ -3,7 +3,14 @@
 // MODULES //
 
 var test = require( 'tape' );
+var hasClass = require( 'detect-class-support' )();
 var copy = require( './../lib/copy.js' );
+
+
+// FIXTURES //
+
+var CustomError1 = require( './fixtures/customerror.proto.js' );
+var createClass = require( './fixtures/customerror.subclass.js' );
 
 
 // TESTS //
@@ -124,3 +131,32 @@ test( '<URIError>', function test( t ) {
 	t.equal( err1.stack, err2.stack, 'equal stack trace' );
 	t.end();
 });
+
+test( 'custom errors (proto)', function test( t ) {
+	var err1 = new CustomError1( 'custom error' );
+	var err2 = copy( err1 );
+
+	t.ok( err1 !== err2, 'separate instances' );
+	t.ok( err2 instanceof CustomError1, 'instance of CustomError' );
+	t.ok( err2 instanceof Error, 'instance of Error' );
+	t.equal( err1.message, err2.message, 'equal messages' );
+	t.equal( err1.name, err2.name, 'equal names' );
+	t.equal( err1.stack, err2.stack, 'equal stack trace' );
+	t.end();
+});
+
+if ( hasClass ) {
+	var CustomError2 = createClass();
+	test( 'custom errors (subclass; ES2015)', function test( t ) {
+		var err1 = new CustomError2( 'custom error' );
+		var err2 = copy( err1 );
+
+		t.ok( err1 !== err2, 'separate instances' );
+		t.ok( err2 instanceof CustomError2, 'instance of CustomError' );
+		t.ok( err2 instanceof Error, 'instance of Error' );
+		t.equal( err1.message, err2.message, 'equal messages' );
+		t.equal( err1.name, err2.name, 'equal names' );
+		t.equal( err1.stack, err2.stack, 'equal stack trace' );
+		t.end();
+	});
+}

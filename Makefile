@@ -104,7 +104,7 @@ test-istanbul-tape: node_modules
 	$(ISTANBUL) cover \
 		--dir $(ISTANBUL_OUT) \
 		--report $(ISTANBUL_REPORT) \
-	$(TAPE) \
+	$(TAPE) -- \
 		"$(TESTS)"
 
 
