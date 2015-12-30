@@ -192,6 +192,43 @@ test( '`syscall` property (Node.js)', function test( t ) {
 	t.end();
 });
 
+test( 'additional (enumerable) properties', function test( t ) {
+	var err1;
+	var err2;
+
+	// Data descriptor...
+	err1 = new Error( 'errrr' );
+	err1.beep = 'boop';
+	err1.boop = 'beep';
+
+	err2 = copy( err1 );
+	t.equal( err2.beep, err1.beep );
+	t.equal( err2.boop, err1.boop );
+
+	// Accessor descriptor...
+	err1 = new Error( 'errrr' );
+	Object.defineProperty( err1, 'beep', {
+		'enumerable': true,
+		'configurable': true,
+		'get': function get() {
+			return 'boop';
+		}
+	});
+	Object.defineProperty( err1, 'boop', {
+		'enumerable': true,
+		'configurable': false,
+		'get': function get() {
+			return 'beep';
+		}
+	});
+
+	err2 = copy( err1 );
+	t.equal( err2.beep, err1.beep );
+	t.equal( err2.boop, err1.boop );
+
+	t.end();
+});
+
 test( 'custom errors (proto)', function test( t ) {
 	var err1 = new CustomError1( 'custom error' );
 	var err2 = copy( err1 );

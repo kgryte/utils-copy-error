@@ -2,7 +2,7 @@ Copy Error
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][build-image]][build-url] [![Coverage Status][coverage-image]][coverage-url] [![Dependencies][dependencies-image]][dependencies-url]
 
-> Copy an `error` object.
+> Copy an [`error`][js-error] object.
 
 
 ## Installation
@@ -20,7 +20,7 @@ var copy = require( 'utils-copy-error' );
 
 #### copy( error )
 
-Copy an `error` object.
+Copy an [`error`][js-error] object.
 
 ``` javascript
 var error = new TypeError( 'beep' );
@@ -32,14 +32,17 @@ var err = copy( error );
 
 ## Notes
 
-*	Supported `error` types:
-	-	`Error`
-	- 	`URIError`
-	-	`ReferenceError`
-	-	`SyntaxError`
-	-	`RangeError`
-	-	`EvalError`
-	-	`TypeError`
+*	Supported built-in `error` types:
+	-	[`Error`][js-error]
+	- 	[`URIError`][js-uri-error]
+	-	[`ReferenceError`][js-reference-error]
+	-	[`SyntaxError`][js-syntax-error]
+	-	[`RangeError`][js-range-error]
+	-	[`EvalError`][js-eval-error]
+	-	[`TypeError`][js-type-error]
+	-	[`System Error`][node-system-error] (Node.js)
+*	The `function` also supports custom [`error`][js-error] types which are [`Error`][js-error] instances (e.g., ES2015 [`Error`][js-error] subclasses).
+*	The `function` copies over all `enumerable` properties, including property descriptors.
 
 
 ## Examples
@@ -166,3 +169,12 @@ Copyright &copy; 2015. Athan Reines.
 [tape]: https://github.com/substack/tape
 [istanbul]: https://github.com/gotwarlost/istanbul
 [testling]: https://ci.testling.com
+
+[js-error]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
+[js-type-error]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError
+[js-syntax-error]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError
+[js-range-error]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError
+[js-reference-error]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError
+[js-uri-error]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError
+[js-eval-error]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError
+[node-system-error]: https://nodejs.org/api/errors.html#errors_class_system_error
