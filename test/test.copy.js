@@ -42,85 +42,85 @@ test( 'if not provided an error instance, the function throws an error', functio
 });
 
 test( 'generic <Error> object', function test( t ) {
-	var error = new Error( 'beep' );
-	var err = copy( error );
+	var err1 = new Error( 'beep' );
+	var err2 = copy( err1 );
 
-	t.ok( error !== err, 'separate instances' );
-	t.ok( err instanceof Error, 'instance of Error' );
-	t.equal( error.message, err.message, 'equal messages' );
-	t.equal( error.name, err.name, 'equal names' );
-	t.equal( error.stack, err.stack, 'equal stack trace' );
+	t.ok( err1 !== err2, 'separate instances' );
+	t.ok( err2 instanceof Error, 'instance of Error' );
+	t.equal( err1.message, err2.message, 'equal messages' );
+	t.equal( err1.name, err2.name, 'equal names' );
+	t.equal( err1.stack, err2.stack, 'equal stack trace' );
 	t.end();
 });
 
 test( '<TypeError>', function test( t ) {
-	var error = new TypeError( 'invalid type' );
-	var err = copy( error );
+	var err1 = new TypeError( 'invalid type' );
+	var err2 = copy( err1 );
 
-	t.ok( error !== err, 'separate instances' );
-	t.ok( err instanceof TypeError, 'instance of TypeError' );
-	t.equal( error.message, err.message, 'equal messages' );
-	t.equal( error.name, err.name, 'equal names' );
-	t.equal( error.stack, err.stack, 'equal stack trace' );
+	t.ok( err1 !== err2, 'separate instances' );
+	t.ok( err2 instanceof TypeError, 'instance of TypeError' );
+	t.equal( err1.message, err2.message, 'equal messages' );
+	t.equal( err1.name, err2.name, 'equal names' );
+	t.equal( err1.stack, err2.stack, 'equal stack trace' );
 	t.end();
 });
 
 test( '<RangeError>', function test( t ) {
-	var error = new RangeError( 'out-of-range' );
-	var err = copy( error );
+	var err1 = new RangeError( 'out-of-range' );
+	var err2 = copy( err1 );
 
-	t.ok( error !== err, 'separate instances' );
-	t.ok( err instanceof RangeError, 'instance of RangeError' );
-	t.equal( error.message, err.message, 'equal messages' );
-	t.equal( error.name, err.name, 'equal names' );
-	t.equal( error.stack, err.stack, 'equal stack trace' );
+	t.ok( err1 !== err2, 'separate instances' );
+	t.ok( err2 instanceof RangeError, 'instance of RangeError' );
+	t.equal( err1.message, err2.message, 'equal messages' );
+	t.equal( err1.name, err2.name, 'equal names' );
+	t.equal( err1.stack, err2.stack, 'equal stack trace' );
 	t.end();
 });
 
 test( '<SyntaxError>', function test( t ) {
-	var error = new SyntaxError( 'bad syntax' );
-	var err = copy( error );
+	var err1 = new SyntaxError( 'bad syntax' );
+	var err2 = copy( err1 );
 
-	t.ok( error !== err, 'separate instances' );
-	t.ok( err instanceof SyntaxError, 'instance of SyntaxError' );
-	t.equal( error.message, err.message, 'equal messages' );
-	t.equal( error.name, err.name, 'equal names' );
-	t.equal( error.stack, err.stack, 'equal stack trace' );
+	t.ok( err1 !== err2, 'separate instances' );
+	t.ok( err2 instanceof SyntaxError, 'instance of SyntaxError' );
+	t.equal( err1.message, err2.message, 'equal messages' );
+	t.equal( err1.name, err2.name, 'equal names' );
+	t.equal( err1.stack, err2.stack, 'equal stack trace' );
 	t.end();
 });
 
 test( '<ReferenceError>', function test( t ) {
-	var error = new ReferenceError( 'undefined variable' );
-	var err = copy( error );
+	var err1 = new ReferenceError( 'undefined variable' );
+	var err2 = copy( err1 );
 
-	t.ok( error !== err, 'separate instances' );
-	t.ok( err instanceof ReferenceError, 'instance of ReferenceError' );
-	t.equal( error.message, err.message, 'equal messages' );
-	t.equal( error.name, err.name, 'equal names' );
-	t.equal( error.stack, err.stack, 'equal stack trace' );
+	t.ok( err1 !== err2, 'separate instances' );
+	t.ok( err2 instanceof ReferenceError, 'instance of ReferenceError' );
+	t.equal( err1.message, err2.message, 'equal messages' );
+	t.equal( err1.name, err2.name, 'equal names' );
+	t.equal( err1.stack, err2.stack, 'equal stack trace' );
 	t.end();
 });
 
 test( '<EvalError>', function test( t ) {
-	var error = new EvalError( 'eval error' );
-	var err = copy( error );
+	var err1 = new EvalError( 'eval err1' );
+	var err2 = copy( err1 );
 
-	t.ok( error !== err, 'separate instances' );
-	t.ok( err instanceof EvalError, 'instance of EvalError' );
-	t.equal( error.message, err.message, 'equal messages' );
-	t.equal( error.name, err.name, 'equal names' );
-	t.equal( error.stack, err.stack, 'equal stack trace' );
+	t.ok( err1 !== err2, 'separate instances' );
+	t.ok( err2 instanceof EvalError, 'instance of EvalError' );
+	t.equal( err1.message, err2.message, 'equal messages' );
+	t.equal( err1.name, err2.name, 'equal names' );
+	t.equal( err1.stack, err2.stack, 'equal stack trace' );
 	t.end();
 });
 
 test( '<URIError>', function test( t ) {
-	var error = new URIError( 'bad URI' );
-	var err = copy( error );
+	var err1 = new URIError( 'bad URI' );
+	var err2 = copy( err1 );
 
-	t.ok( error !== err, 'separate instances' );
-	t.ok( err instanceof URIError, 'instance of URIError' );
-	t.equal( error.message, err.message, 'equal messages' );
-	t.equal( error.name, err.name, 'equal names' );
-	t.equal( error.stack, err.stack, 'equal stack trace' );
+	t.ok( err1 !== err2, 'separate instances' );
+	t.ok( err2 instanceof URIError, 'instance of URIError' );
+	t.equal( err1.message, err2.message, 'equal messages' );
+	t.equal( err1.name, err2.name, 'equal names' );
+	t.equal( err1.stack, err2.stack, 'equal stack trace' );
 	t.end();
 });
