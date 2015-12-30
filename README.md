@@ -23,9 +23,9 @@ var copy = require( 'utils-copy-error' );
 Copy an [`error`][js-error] object.
 
 ``` javascript
-var error = new TypeError( 'beep' );
+var err1 = new TypeError( 'beep' );
 
-var err = copy( error );
+var err2 = copy( err1 );
 // returns <TypeError>
 ```
 
