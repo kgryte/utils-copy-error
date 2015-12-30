@@ -1,6 +1,6 @@
 {
   "name": "utils-copy-error",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Copy an error object.",
   "author": {
     "name": "Athan Reines",
